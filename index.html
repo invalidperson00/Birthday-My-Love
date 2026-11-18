@@ -4,745 +4,279 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Birthday Surprise ❤️</title>
+<title>Happy Birthday Meri Jaan ❤️</title>
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #080019;
-    color: white;
-    overflow-x: hidden;
-}
-
-#sky {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.stars {
-    position: fixed;
-    inset: 0;
-    background-image:
-    radial-gradient(2px 2px at 20% 30%, white, transparent),
-    radial-gradient(2px 2px at 70% 20%, white, transparent),
-    radial-gradient(2px 2px at 40% 80%, white, transparent),
-    radial-gradient(2px 2px at 90% 65%, white, transparent);
-    background-size: 180px 180px;
-    animation: twinkle 3s infinite alternate;
-    pointer-events: none;
-}
-
-@keyframes twinkle {
-    from { opacity: .3; }
-    to { opacity: 1; }
-}
-
-.moon {
-    position: fixed;
-    top: 65px;
-    right: 10%;
-    width: 85px;
-    height: 85px;
-    border-radius: 50%;
-    background: #fff0c0;
-    box-shadow: 0 0 35px #ffe6a0,
-                0 0 90px #ffc9a0;
-    z-index: 0;
-    animation: moonGlow 3s infinite alternate;
-}
-
-@keyframes moonGlow {
-    to {
-        box-shadow: 0 0 75px #ffe6a0,
-                    0 0 130px #ffc9a0;
-    }
-}
-
-/* Diwali lights */
-
-.lights {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    z-index: 10;
-    padding: 12px 3px;
-}
-
-.bulb {
-    width: 12px;
-    height: 18px;
-    border-radius: 50%;
-    background: #ffe36b;
-    box-shadow: 0 0 15px #ffe36b;
-    animation: blink .8s infinite alternate;
-}
-
-.bulb:nth-child(2n) {
-    background: #ff55ae;
-    box-shadow: 0 0 15px #ff55ae;
-    animation-delay: .4s;
-}
-
-.bulb:nth-child(3n) {
-    background: #68eaff;
-    box-shadow: 0 0 15px #68eaff;
-    animation-delay: .7s;
-}
-
-@keyframes blink {
-    to { opacity: .4; transform: scale(1.3); }
-}
-
-/* Pages */
-
-.page {
-    min-height: 100vh;
-    width: 100%;
-    display: none;
-    position: relative;
-    z-index: 2;
-    padding: 115px 18px 60px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.page.active {
-    display: flex;
-    animation: pageEnter .8s ease;
-}
-
-@keyframes pageEnter {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-h1 {
-    font-size: clamp(36px, 8vw, 65px);
-    color: #ffb5d5;
-    text-shadow: 0 0 20px #ff238b,
-                 0 0 50px #ff0080;
-    animation: titleGlow 2s infinite alternate;
-}
-
-@keyframes titleGlow {
-    to { text-shadow: 0 0 40px #ff238b, 0 0 80px #ff0080; }
-}
-
-h2 {
-    color: #ffb6d9;
-    margin-bottom: 20px;
-    font-size: 27px;
-}
-
-p {
-    color: #fff0f7;
-    font-size: 17px;
-    line-height: 2;
-}
-
-.highlight {
-    color: #ffd166;
-    font-size: clamp(25px, 6vw, 42px);
-    margin: 20px 0;
-    animation: heartbeat 1.5s infinite;
-}
-
-@keyframes heartbeat {
-    50% { transform: scale(1.08); }
-}
-
-/* Cards */
-
-.card {
-    width: min(700px, 100%);
-    margin: 20px auto;
-    padding: 30px 22px;
-    border-radius: 25px;
-    background: rgba(255,255,255,.09);
-    border: 1px solid rgba(255,180,220,.4);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 0 35px rgba(255,50,140,.2);
-}
-
-.rose {
-    font-size: 42px;
-    margin: 15px;
-    animation: roseMove 2s infinite alternate;
-}
-
-@keyframes roseMove {
-    to { transform: rotate(15deg) scale(1.2); }
-}
-
-/* Buttons */
-
-button {
-    border: none;
-    border-radius: 35px;
-    padding: 15px 27px;
-    margin: 12px 6px;
-    color: white;
-    background: linear-gradient(45deg, #ff247d, #ff91c0);
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 0 20px #ff247d;
-    transition: .3s;
-}
-
-button:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 35px #ff4d9b;
-}
-
-.back {
-    background: linear-gradient(45deg, #6540a0, #a879d6);
-    box-shadow: 0 0 15px #9d6ad0;
-}
-
-/* Balloons */
-
-.balloon {
-    position: fixed;
-    bottom: -100px;
-    width: 38px;
-    height: 52px;
-    border-radius: 50%;
-    z-index: 0;
-    opacity: .85;
-    animation: balloonUp linear infinite;
-}
-
-.balloon::after {
-    content: "";
-    position: absolute;
-    height: 35px;
-    border-left: 1px solid white;
-    top: 50px;
-    left: 19px;
-}
-
-@keyframes balloonUp {
-    to { transform: translateY(-120vh) rotate(15deg); }
-}
-
-/* Floating hearts */
-
-.float {
-    position: fixed;
-    bottom: -50px;
-    pointer-events: none;
-    z-index: 4;
-    animation: floatUp linear forwards;
-}
-
-@keyframes floatUp {
-    to {
-        transform: translateY(-110vh) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-/* Cake */
-
-.cake {
-    font-size: 85px;
-    margin: 20px;
-    animation: heartbeat 1.2s infinite;
-}
-
-/* Letter */
-
-#letter {
-    display: none;
-    margin-top: 25px;
-    animation: reveal 1.5s ease;
-}
-
-#letter.show {
-    display: block;
-}
-
-@keyframes reveal {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-footer {
-    margin-top: 25px;
-    color: #ffbddb;
-    line-height: 2;
-}
-
-@media(max-width:600px) {
-    .moon {
-        width: 60px;
-        height: 60px;
-        right: 7%;
-    }
-
-    .card {
-        padding: 24px 16px;
-    }
-
-    p {
-        font-size: 15px;
-    }
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="stars"></div>
-<div class="moon"></div>
-<canvas id="sky"></canvas>
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop preload="auto">
+    <source src="music/Ishqa Ve_.mp3" type="audio/mpeg">
+    Your browser does not support audio playback.
+</audio>
+
+
+<div class="stars" id="stars"></div>
+
 <div class="lights" id="lights"></div>
 
-<!-- PAGE 1 -->
+<canvas id="fireworks"></canvas>
+
+<div class="page-counter" id="pageCounter">
+Surprise 1 / 5 ❤️
+</div>
+
+<!-- PAGE 1: WELCOME -->
 
 <section class="page active" id="page1">
 
-<h1>Happy Birthday ❤️</h1>
+    <div class="moon"></div>
 
-<div class="highlight">
-My Love ❤ 🌹
-</div>
+    <h1>🌙 A Special Night For You ❤️</h1>
 
-<p>
-Tonight is not an ordinary night.<br>
-The moon is shining, the stars are glowing,<br>
-and something special is waiting for you.
-</p>
+    <h2>My Beautiful Girl 💗</h2>
 
-<div class="rose">🌹 💗 🌹</div>
+    <div class="card center">
+        <p>
+            Tonight is not just another night.
+            Tonight is the birthday of someone
+            who makes my world more beautiful.
+        </p>
 
-<button onclick="nextPage(2)">
-Open Your Surprise 🎁 →
-</button>
+        <p>
+            I have prepared a little surprise
+            filled with love, happiness and duas.
+        </p>
+
+        <h2>🎂 Are You Ready, Meri Jaan 👀💕</h2>
+    </div>
+
+    <button onclick="nextPage(2)">
+        Start Your Surprise 💝
+    </button>
 
 </section>
 
-<!-- PAGE 2 -->
+
+<!-- PAGE 2: SURPRISE -->
 
 <section class="page" id="page2">
 
-<div class="card">
+    <h1>🎈 A Little Celebration For You 🎈</h1>
 
-<h2>🎈 A Little Surprise For You 🎈</h2>
+    <div class="cake">🎂</div>
 
-<div class="rose">🌹 ❤️ 🌸 💗 🌹</div>
+    <div class="card center">
 
-<p>
-If I could collect every star in the universe,
-I would write your happiness across the sky.
+        <h2>🌹 For My Princess 🌹</h2>
 
-If I could collect every rose in the world,
-I would give them all to you.
+        <p>
+            If I could send you one thing today,
+            it would be a mirror,
+            so you could see how beautiful
+            and special you are to me.
+        </p>
 
-You deserve beautiful moments,
-endless smiles and a lifetime of happiness.
-</p>
+        <p>
+            May your smile always shine brighter
+            than all the stars in this sky. ✨
+        </p>
 
-<p style="margin-top:20px">
-Every little detail here carries a beautiful wish for you. ❤️
-</p>
+        <h2>❤️ You Deserve All The Happiness!</h2>
 
-</div>
+        <div style="font-size:45px">
+            🌹 💗 🧸 🌸 🎀
+        </div>
 
-<button class="back" onclick="nextPage(1)">← Previous</button>
-<button onclick="nextPage(3)">Continue My Surprise ❤️ →</button>
+    </div>
+
+    <button onclick="nextPage(1)">Previous</button>
+    <button onclick="nextPage(3)">Read My Heart ❤️</button>
 
 </section>
 
-<!-- PAGE 3 -->
+
+<!-- PAGE 3: HEARTFELT MESSAGE -->
 
 <section class="page" id="page3">
 
-<div class="card">
+    <h1>🌙❤️🎂 HAPPY BIRTHDAY MERI JAAN, MERI DUNIYA! 🎂❤️🌙</h1>
 
-<h2>❤️ More Than Just Love</h2>
+    <div class="card">
 
-<p>
-I don't want to understand only your smile.
+        <p>
+        Happy Birthday to the most wonderful person in my life meri jaan meri khushi mera sukoon aur meri duniya! 🥹❤️🫶🏻 Aap sirf meri life ka ek hissa nhi aap meri puri life hai 🥹💗🌍 Aaj ka din mere liye bhi bohot special hai q ki aaj us insaan ka birthday hai jo meri zindagi me bht sari khushiya lekar aaya hai 🎂💕 Alhamdulillah Allah ka jitna shukr ada karu utna kam hai ke Usne mujhe aap jaisi pyari aur special insaan se milaya 🤲🏻❤️🌙
+        </p>
 
-I want to understand your silence,
-your emotions, your fears and your dreams.
+        <p>
+        Meri jaan 🥹💗 aapko shyd andaza bhi nhi hai ke aap mere waste kitte special hai. Aapki ek smile mera mood sahi kar deti hai aapki ek baat mere chere par smile la deti hai aur aapka thoda sa pyar mere pure din ko khoobsurat bana deti hai 🫶🏻❤️🥺 Aapse baat karna aapki batein sunna aapko tang karna aur aapke sath choti choti bato par hasna apse choti choti bato par ladna mere waste duniya ki sabse pyari feelings me se ek hai 🥹🎀❤️
+        </p>
 
-I want to listen when you need someone,
-support you when things get difficult,
-respect your decisions,
-and celebrate every little success of yours.
+        <p>
+        Meri jaan aap wo insaan ho jo mujhe ache waqt me support karte aur jab mai galat hota hu toh mujhe rokte, mujh par gussa karte aur mujhe sahi raasta dikhate 🥹❤️🫶🏻 Aap mujhe samajhte, haa kbhi kbhi nhi bhi samajhte 🤭😂❤️ lkn koi baat nhi q ki aapka mujhe samajhne ki koshish karna bhi mere waste bht value rakhta hai 🥹💗 Aap mujhse pyar toh bht karte bas jatate nhi 🤭❤️
+        </p>
 
-I don't want you to hide your feelings
-because you are afraid of being misunderstood.
+        <p>
+        I like the way you like me 🫠🫣 Aur shyd isi baat par mai aapse kbhi kbhi naraz bhi ho jaata hu lkn dil se janta hu ke aap mere liye bht special hai 🥹🧿💞
+        </p>
 
-I want to be someone with whom you can
-be completely yourself.
+        <p>
+        Meri jaan sach bolu toh mujhe lambe lambe paragraphs mei wish karna nhi aata 🤭🥹❤️ Na hi mujhe malum hai ke apne dil ki har baat ko lafzo me kaise bayan karna. Bas itna malum hai ke aap meri zindagi me bht important hai aur mai aapko hamesha khush dekhna chahta hu 🫶🏻❤️🌍 Aapke sath kitni dur tak ka safar likha hai ye toh mujhe nhi malum lkn Allah se meri bas yehi dua hai ke apna sath sirf kuch waqt ka nahi balki puri zindagi ka ban jaye 🤲🏻🥹❤️💍 Allah kare hum zindagi ke har turn par ek dusre ka sath de aur kbhi ek dusre ka haath na chode, ek dusre ko samjh ke chale 🤍🌙🧿
+        </p>
 
-I want to keep learning how to understand you better.
-</p>
+    </div>
 
-</div>
-
-<div class="card">
-
-<h2>🌹 My Promise</h2>
-
-<p>
-I cannot promise that every day will be perfect.
-
-But I can promise to communicate honestly,
-respect your individuality,
-value your feelings,
-and never take your presence for granted.
-
-You deserve genuine love and understanding. ❤️
-</p>
-
-</div>
-
-<button class="back" onclick="nextPage(2)">← Previous</button>
-<button onclick="nextPage(4)">One More Surprise 🎆 →</button>
+    <button onclick="nextPage(2)">Previous</button>
+    <button onclick="nextPage(4)">One More Surprise 🎆</button>
 
 </section>
 
-<!-- PAGE 4 -->
+
+<!-- PAGE 4: FIREWORKS -->
 
 <section class="page" id="page4">
 
-<h1>Let The Celebration Begin! 🎆</h1>
+    <h1 class="final-heading">
+        🎆 Let's Celebrate Your Day! 🎆
+    </h1>
 
-<div class="cake">🎂</div>
+    <div class="cake">🎂</div>
 
-<div class="card">
+    <div class="card center">
 
-<h2>Make A Beautiful Wish! 💖</h2>
+        <h2>Make A Wish, My Princess! 👑</h2>
 
-<p>
-Close your eyes for a moment.
+        <p>
+            Close your eyes for a moment
+            and make a beautiful wish.
+        </p>
 
-Think about your biggest dream.
+        <p>
+            May every dream in your heart
+            find its way into your life.
+        </p>
 
-Make a wish and believe in yourself.
+        <h2>🌹 You Are My Favourite Person 🌹</h2>
 
-May this new year of your life bring
-success, peace, happiness and endless love.
+        <p>
+            Sending you a thousand hugs,
+            a million smiles and endless love.
+        </p>
 
-Tonight, the stars are celebrating you! ✨
-</p>
+    </div>
 
-<button onclick="celebrate()">
-Launch Fireworks 🎆
-</button>
+    <button onclick="celebrate()">Launch Fireworks 🎆</button>
 
-</div>
+    <br>
 
-<div class="rose">🌹 🎈 ❤️ 🌹</div>
-
-<button class="back" onclick="nextPage(3)">← Previous</button>
-<button onclick="nextPage(5)">Open Your Final Surprise 💌 →</button>
+    <button onclick="nextPage(3)">Previous</button>
+    <button onclick="nextPage(5)">Your Final Surprise 💌</button>
 
 </section>
 
-<!-- PAGE 5 -->
+
+<!-- PAGE 5: FINAL LETTER -->
 
 <section class="page" id="page5">
 
-<h1>A Special Message For You 💌</h1>
+    <div class="envelope-area" id="envelopeArea">
 
-<div class="card">
+        <h1 class="final-heading">
+            One Last Surprise ❤️
+        </h1>
 
-<h2>To My Favourite Person ❤️</h2>
+        <div class="envelope">💌</div>
 
-<p>
-I may not always have the perfect words
-to express what I feel.
+        <h2>Something From My Heart...</h2>
 
-But I want you to know that
-your happiness matters to me,
-your feelings matter to me,
-and your dreams matter to me.
+        <p>
+            There are some feelings that words cannot explain.
+            But tonight, I want you to read something special.
+        </p>
 
-I don't promise to be a perfect person.
+        <button onclick="openFinalLetter()">
+            Open Your Love Letter 💗
+        </button>
 
-But I promise to keep learning,
-to communicate honestly,
-to respect your individuality,
-and to understand you better every day.
+    </div>
 
-I want to celebrate your happiest moments
-and support you through your difficult ones.
 
-I never want you to feel that
-you have to be someone else to be loved.
+    <div id="finalContent" class="reveal-content">
 
-Always be yourself.
-Keep smiling.
-Keep growing.
-Keep shining.
+        <h1>🌙 My Duas For You ❤️</h1>
 
-And remember...
+        <div class="card">
 
-If I had one wish tonight,
-I would wish for your happiness
-to last longer than the stars in the sky.
+            <p>
+            Meri pyari jaan aaj aapke birthday par mai apke sath nhi hu lkn insha allah next year sath me cake cut karenge aur bas Allah se dil se dua karta hu ke Allah aapki zindagi ko khushiyo se bhar de aapki har pareshani ko aasani mei badal de aapki har dua qubool kare aur aapke naseeb me sirf wahi likhe jo aapke liye behtareen ho 🤲🏻🌙✨
+            </p>
 
-Happy Birthday, My Beautiful Girl! ❤️🌹
+            <p>
+            Ya Allah meri jaan ko har buri nazar se mehfooz rakhna 🧿🤲🏻 Unke dil ko sukoon dena unke har mushkil waqt me unki madad karna unke liye aasaniya paida karna aur unki zindagi me aise log rakhna jo unki izzat kare unki qadar kare aur unke chehre par hamesha muskurahat laaye. Unke har ache dream ko pura kar dena aur apni rehmat aur barkat se unki zindagi bhar dena Ameen Ya Rabb-ul-Alameen 🤍🌙✨
+            </p>
 
-With endless love,
-Someone who wants to see you happy. 💗
-</p>
+            <p>
+            Meri jaan 🥹💗 aap sirf meri mohabbat nahi ho aap meri duaon ka bhi ek khoobsurat hissa hai ❤️🤲🏻 Mai chahta hu ke aap apni life me bht aage jao apne sare dreams pure karo aur har wo khushi pao jiski aap haqdar ho 🥹🌸💖 Mai har cheez perfect karne ka wada nahi kar sakta lkn itni koshish zaroor karna chahta hu ke aapko mere sath mohabbat, izzat, care, honesty aur sukoon mile aur aapki aankho me meri taraf se kabhi aansu na aaye ❤️🥹💗
+            </p>
 
-</div>
+            <p>
+            Meri jaan main dua karta hu ke Allah agar apne haq me behtar samjhe toh apne rishte ko halal, khoobsurat aur barkat wala banaye 🤲🏻❤️ Allah hamare beech mohabbat ke sath samajh, bharosa, sabar aur izzat bhi rakhe aur hume ek dusre ka life partner banaye Ameen 🥹🤍💍💍
+            </p>
 
-<div class="rose">🌹 ❤️ 🌹</div>
+            <h2 class="final-heading center">
+            🌙❤️🎂 HAPPY BIRTHDAY ONCE AGAIN MERI JAAN, MERI CUTE SI PRINCESS MERI DUNIYA! 👑🎂❤️🫶🏻
+            </h2>
 
-<button onclick="celebrate()">
-Celebrate Again! 🎆
-</button>
+            <p class="center">
+            I LOVE YOU SO MUCH MERI JAAN! 🥹❤️🫶🏻🎀🌙 Aap hamesha khush raho hamesha muskurate raho aur Allah ki rehmat aap par hamesha bani rahe 🤍✨
+            </p>
 
-<button class="back" onclick="nextPage(4)">
-← Previous
-</button>
+            <p>
+            Meri jaan aap meri life ka sirf ek hissa nahi ho aap meri life ki wo khoobsurat wajah ho jiske liye main Allah ka shukr ada karta hoon. 🥹❤️🤲🏻🌙🧿💗
+            </p>
 
-<footer>
-Made with endless love ❤️<br>
-For someone who deserves the whole universe. 🌙<br>
-Under the same moon, beneath the same stars. ✨
-</footer>
+            <p class="center">
+            aur allah kre apke ankho ki roshani itti badh jaye ki meri mohabbat apko clear dikhe 🤭🤭
+            </p>
+
+            <h1 class="final-heading center">
+            ONCE AGAIN HAPPY BIRTHDAY MERI JAAN!! 🫀
+            </h1>
+
+            <h1 class="center">
+            Meri Princess 👸🌹
+            </h1>
+
+            <div class="final-heart center">❤️</div>
+
+            <h2 class="gold center">
+            You deserve the whole universe. 🌙✨
+            </h2>
+
+            <p class="center">
+            I don't know what Allah has written for our future,
+            but every time I make a dua for my happiness,
+            I remember to pray for yours too. ❤️🤲🏻🌙
+            </p>
+
+        </div>
+
+        <button onclick="celebrate()">
+            Celebrate Our Love 🎆
+        </button>
+
+        <br>
+
+        <button onclick="nextPage(4)">Previous</button>
+
+    </div>
 
 </section>
 
-<script>
 
-/* PAGE NAVIGATION */
-
-let currentPage = 1;
-
-function nextPage(number) {
-
-    document.getElementById("page" + currentPage)
-    .classList.remove("active");
-
-    currentPage = number;
-
-    document.getElementById("page" + currentPage)
-    .classList.add("active");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-    if(number === 2 || number === 4 || number === 5) {
-        celebrate();
-    }
-}
-
-/* DIWALI LIGHTS */
-
-const lights = document.getElementById("lights");
-
-for(let i = 0; i < 30; i++) {
-    const bulb = document.createElement("div");
-    bulb.className = "bulb";
-    lights.appendChild(bulb);
-}
-
-/* BALLOONS */
-
-const colors = [
-    "#ff4d8d", "#ffcf56", "#6ee7ff",
-    "#b57aff", "#ff786b", "#75edb1"
-];
-
-for(let i = 0; i < 20; i++) {
-
-    const balloon = document.createElement("div");
-
-    balloon.className = "balloon";
-    balloon.style.left = Math.random() * 100 + "vw";
-    balloon.style.background = colors[i % colors.length];
-    balloon.style.animationDuration =
-        (9 + Math.random() * 12) + "s";
-    balloon.style.animationDelay =
-        (-Math.random() * 15) + "s";
-
-    document.body.appendChild(balloon);
-}
-
-/* FLOATING HEARTS AND FLOWERS */
-
-const symbols = [
-    "❤️", "💗", "💕", "🌹",
-    "🌸", "✨", "💖", "🌺"
-];
-
-function createFloating() {
-
-    const item = document.createElement("div");
-
-    item.className = "float";
-
-    item.innerHTML =
-        symbols[Math.floor(Math.random() * symbols.length)];
-
-    item.style.left = Math.random() * 100 + "vw";
-    item.style.fontSize =
-        (18 + Math.random() * 25) + "px";
-
-    item.style.animationDuration =
-        (5 + Math.random() * 5) + "s";
-
-    document.body.appendChild(item);
-
-    setTimeout(() => item.remove(), 10000);
-}
-
-setInterval(createFloating, 450);
-
-/* FIREWORKS */
-
-const canvas = document.getElementById("sky");
-const ctx = canvas.getContext("2d");
-
-let W, H;
-let rockets = [];
-let particles = [];
-
-function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-}
-
-window.addEventListener("resize", resize);
-resize();
-
-function launchFirework() {
-
-    rockets.push({
-        x: Math.random() * W,
-        y: H,
-        targetY: Math.random() * H * .5 + 50,
-        speed: 5 + Math.random() * 3,
-        color: `hsl(${Math.random() * 360},100%,65%)`
-    });
-
-}
-
-function explode(x, y, color) {
-
-    for(let i = 0; i < 100; i++) {
-
-        const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 5 + 1;
-
-        particles.push({
-            x: x,
-            y: y,
-            vx: Math.cos(angle) * speed,
-            vy: Math.sin(angle) * speed,
-            alpha: 1,
-            color: color,
-            size: Math.random() * 3 + 1
-        });
-
-    }
-
-}
-
-function animate() {
-
-    ctx.clearRect(0, 0, W, H);
-
-    rockets.forEach((r, index) => {
-
-        r.y -= r.speed;
-
-        ctx.fillStyle = r.color;
-        ctx.beginPath();
-        ctx.arc(r.x, r.y, 3, 0, Math.PI * 2);
-        ctx.fill();
-
-        if(r.y <= r.targetY) {
-            explode(r.x, r.y, r.color);
-            rockets.splice(index, 1);
-        }
-
-    });
-
-    particles.forEach((p, index) => {
-
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vy += .035;
-        p.alpha -= .012;
-
-        ctx.globalAlpha = Math.max(0, p.alpha);
-        ctx.fillStyle = p.color;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-
-        if(p.alpha <= 0) {
-            particles.splice(index, 1);
-        }
-
-    });
-
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(animate);
-}
-
-animate();
-
-/* CELEBRATION */
-
-let fireworkInterval;
-
-function celebrate() {
-
-    for(let i = 0; i < 12; i++) {
-        setTimeout(launchFirework, i * 200);
-    }
-
-    clearInterval(fireworkInterval);
-
-    fireworkInterval = setInterval(launchFirework, 600);
-
-    setTimeout(() => {
-        clearInterval(fireworkInterval);
-    }, 15000);
-
-}
-
-/* INITIAL CELEBRATION */
-
-setTimeout(celebrate, 1200);
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
